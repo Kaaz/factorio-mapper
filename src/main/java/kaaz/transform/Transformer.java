@@ -20,6 +20,9 @@ import static org.apache.commons.codec.CharEncoding.UTF_8;
 public class Transformer {
 
     public static BuildPlan fromGameBluePrint(String blueprint) {
+        if (blueprint == null || blueprint.length() < 1) {
+            return null;
+        }
         String bp = blueprint.substring(1);
         String decodedString = null;
         try {
@@ -28,11 +31,10 @@ public class Transformer {
         } catch (UnsupportedEncodingException e) {
             return null;
         }
-        System.out.println("decodedBytes: ");
-        System.out.println(decodedString);
+//        System.out.println("Decoded string: ");
+//        System.out.println(decodedString);
         Gson gson = new Gson();
         BlueprintRoot blueprintRoot = gson.fromJson(decodedString, BlueprintRoot.class);
-        System.out.println(blueprintRoot.getBlueprint().toString());
         return toBuildPlan(blueprintRoot.getBlueprint());
     }
 
@@ -41,7 +43,6 @@ public class Transformer {
         for (Entity entity : bp.getEntities()) {
             plan.addEntity(new Buildable(Entities.fromCode(entity.getName()), entity.getPosition().getX(), entity.getPosition().getY()));
         }
-        System.out.println(plan.toString());
         return plan;
     }
 
@@ -54,7 +55,7 @@ public class Transformer {
         Inflater inflater = new Inflater();
         int numberOfBytesToDecompress = bytesToDecompress.length;
         inflater.setInput(bytesToDecompress, 0, numberOfBytesToDecompress);
-        List<Byte> bytesDecompressedSoFar = new ArrayList<Byte>();
+        List<Byte> bytesDecompressedSoFar = new ArrayList<>();
         try {
             while (!inflater.needsInput()) {
                 byte[] bytesDecompressedBuffer = new byte[numberOfBytesToDecompress];

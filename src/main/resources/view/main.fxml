@@ -38,6 +38,6 @@
       		<TextField fx:id="input_blueprint" prefHeight="151.0" prefWidth="623.0" />
       </children>
    	</HBox>
-   	<ImageView fx:id="blueprint_image" id="blueprint-image" fitHeight="486.0" fitWidth="844.0" layoutX="56.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true" />
+   	<ImageView id="blueprint-image" fx:id="blueprint_image" fitHeight="636.0" fitWidth="732.0" layoutX="56.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
